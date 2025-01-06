@@ -1,5 +1,17 @@
 version: '3.8'
 
+x-network: &NETWORK
+  # for Virtual machine
+  network_mode: host
+  # for Container
+  # networks:
+  #   internal:
+
+networks:
+  internal:
+    name: internal
+    external: true
+
 services:
   tailscale:
     image: tailscale/tailscale
@@ -10,7 +22,7 @@ services:
       - NET_ADMIN
     security_opt:
       - seccomp:unconfined
-    network_mode: host
+    <<: [*NETWORK]
     volumes:
       - /var/lib:/var/lib
       - /dev/net/tun:/dev/net/tun
