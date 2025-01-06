@@ -25,7 +25,8 @@ services:
     <<: [*NETWORK]
     volumes:
       - /var/lib:/var/lib
-      - /dev/net/tun:/dev/net/tun
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    devices:
+      - /dev/net/tun:/dev/net/tun
     restart: always
     command: tailscaled
